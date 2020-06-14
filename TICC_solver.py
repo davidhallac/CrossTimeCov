@@ -47,17 +47,18 @@ class TICC:
         np.set_printoptions(formatter={'float': lambda x: "{0:0.4f}".format(x)})
         np.random.seed(102)
 
-    def fit(self, input_file):
+    def fit(self, input_file, delimiter=","):
         """
         Main method for TICC solver.
         Parameters:
             - input_file: location of the data file
+            - delimiter: delimiter of the data in the input file
         """
         assert self.maxIters > 0  # must have at least one iteration
         self.log_parameters()
 
         # Get data into proper format
-        times_series_arr, time_series_rows_size, time_series_col_size = self.load_data(input_file)
+        times_series_arr, time_series_rows_size, time_series_col_size = self.load_data(input_file, delimiter)
 
         ############
         # The basic folder to be created
@@ -360,8 +361,8 @@ class TICC:
 
         return str_NULL
 
-    def load_data(self, input_file):
-        Data = np.loadtxt(input_file, delimiter=",")
+    def load_data(self, input_file, delimiter):
+        Data = np.loadtxt(input_file, delimiter=delimiter)
         (m, n) = Data.shape  # m: num of observations, n: size of observation vector
         print("completed getting the data")
         return Data, m, n
