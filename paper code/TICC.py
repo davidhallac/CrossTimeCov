@@ -19,10 +19,10 @@ np.set_printoptions(formatter={'float': lambda x: "{0:0.4f}".format(x)})
 np.random.seed(102)
 #####################PARAMETERS TO PLAY WITH 
 window_size = 10
-maxIters = 1000 ##number of Iterations of the smoothening + clustering algo
-beta = 400 ## Beta parameter
+maxIters = 100 ##number of Iterations of the smoothening + clustering algo
+beta = 5 ## Beta parameter
 lambda_parameter = 11e-2 ## Lambda regularization parameter
-number_of_clusters = 11
+number_of_clusters = 2
 threshold = 2e-5##Threshold for plots. Not used in TICC algorithm.
 write_out_file = False ##Only if True are any files outputted
 seg_len = 300##segment-length : used in confusion matrix computation
@@ -179,7 +179,7 @@ def compute_confusion_matrix(num_clusters,clustered_points_algo, sorted_indices_
 	seg_len = 200
 	true_confusion_matrix = np.zeros([num_clusters,num_clusters])
 	for point in xrange(len(clustered_points_algo)):
-		cluster = clustered_points_algo[point]
+		cluster = int(clustered_points_algo[point])
 
 
 		##CASE G: ABBACCCA
